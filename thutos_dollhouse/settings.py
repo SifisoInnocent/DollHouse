@@ -15,7 +15,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-!xtir!@u(@^fw9d6b(%ui8k$m8jti!dymjng8ma2fk^vc2#kv#')
 DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+
+# Configure ALLOWED_HOSTS
+_allowed_hosts = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+ALLOWED_HOSTS = list(_allowed_hosts)
+
+# Add Render host dynamically
+if not DEBUG:
+    from urllib.parse import urlparse
+    from os import environ
+    render_url = environ.get('RENDER_EXTERNAL_URL', '')
+    if render_url:
+        parsed = urlparse(render_url)
+        host = parsed.netloc.split(':')[0]
+        if host not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(host)
 
 # Application definition
 INSTALLED_APPS = [

@@ -660,35 +660,90 @@
         .owner-tag i {
             color: var(--accent-primary);
         }
-        .deco-badge {
-            position: absolute;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 10px 16px;
-            font-size: 0.75rem;
-            box-shadow: var(--shadow-sm);
+
+        /* ══════════════════════════════════════
+           ABOUT SECTION
+        ══════════════════════════════════════ */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            padding: 48px 0;
         }
-        .deco-badge.top-right {
-            top: 20px;
-            right: -30px;
-        }
-        .deco-badge.bottom-left {
-            bottom: 40px;
-            left: -30px;
-        }
-        .deco-badge .db-num {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
+        .section-eyebrow {
+            font-size: 0.72rem;
             font-weight: 600;
-            color: var(--accent-primary);
-            line-height: 1;
-        }
-        .deco-badge .db-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
+            color: var(--accent-primary);
+            margin-bottom: 12px;
+        }
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .about-content p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        .about-feature i {
+            color: var(--accent-primary);
+            font-size: 1rem;
+        }
+        .about-image {
+            display: flex;
+            justify-content: center;
+        }
+        .about-frame {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4/3;
+            border-radius: 24px;
+            background: var(--bg-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border-light);
+        }
+        .about-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+        }
+        .about-placeholder i {
+            font-size: 3rem;
+            opacity: 0.4;
+        }
+        @media (max-width: 768px) {
+            .about-section {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                text-align: center;
+            }
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            .about-content h2 {
+                font-size: 2rem;
+            }
         }
 
         /* ══════════════════════════════════════
@@ -1952,21 +2007,21 @@
         <div class="hero">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <div class="hero-eyebrow">Hair & Beyond · Est. 2024</div>
+                    <div class="hero-eyebrow">Premium Hair & Beauty · South Africa</div>
                     <h1 class="hero-h1">
-                        <em>Confidently</em>
-                        <strong class="gold-text">Beautiful</strong>
-                        with a Nice Heart
+                        <em>Elevate Your</em>
+                        <strong class="gold-text">Beauty</strong>
+                        Journey
                     </h1>
-                    <p class="hero-sub">Premium frontals, hair products, and accessories crafted for women who refuse to be ordinary. Find your perfect look, delivered with love.</p>
+                    <p class="hero-sub">Experience luxury frontals, premium hair products, and exclusive accessories. Where quality meets elegance, and every client deserves to shine.</p>
                     <div class="hero-actions">
-                        <button class="btn btn-gold" onclick="navigate('frontals')"><i class="fas fa-crown"></i> Shop Frontals</button>
-                        <button class="btn btn-ghost" onclick="navigate('hair-products')"><i class="fas fa-hand-sparkles"></i> Explore Hair</button>
+                        <button class="btn btn-gold" onclick="navigate('frontals')"><i class="fas fa-gem"></i> Shop Collection</button>
+                        <button class="btn btn-ghost" onclick="navigate('hair-products')"><i class="fas fa-sparkles"></i> View Products</button>
                     </div>
                     <div class="hero-stats">
                         <div class="hero-stat"><div class="num" id="stat-products">0</div><div class="label">Products</div></div>
-                        <div class="hero-stat"><div class="num">100%</div><div class="label">Quality</div></div>
-                        <div class="hero-stat"><div class="num">⭐ 5</div><div class="label">Rated</div></div>
+                        <div class="hero-stat"><div class="num">⭐ 5</div><div class="label">Rating</div></div>
+                        <div class="hero-stat"><div class="num">24/7</div><div class="label">Support</div></div>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -1976,19 +2031,51 @@
                             <img src="" alt="Thuto – Owner" id="ownerImg"
                             onerror="this.style.display='none';document.getElementById('ownerPH').style.display='flex';" style="display:none;" />
                             <div class="owner-placeholder" id="ownerPH">
-                                <i class="fas fa-user-circle"></i>
-                                <span>Thuto</span>
+                                <i class="fas fa-camera"></i>
+                                <span>Add Owner Photo</span>
+                                <small style="font-size:0.7rem;opacity:0.6;">Click to upload</small>
                             </div>
                         </div>
                     </div>
-                    <div class="owner-tag"><i class="fas fa-crown"></i> Thuto · Founder & CEO</div>
-                    <div class="deco-badge top-right">
-                        <div class="db-num">R450+</div>
-                        <div class="db-label">Starting from</div>
+                    <div class="owner-tag"><i class="fas fa-crown"></i> Thuto · Owner</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div class="section">
+            <div class="container">
+                <div class="about-section">
+                    <div class="about-content">
+                        <div class="section-eyebrow">About Us</div>
+                        <h2>Where Beauty Meets Excellence</h2>
+                        <p>At Thuto's Dollhouse, we believe every woman deserves to feel confident and beautiful. Our premium frontals and hair products are carefully selected to ensure the highest quality. From consultation to delivery, we're committed to making your beauty dreams a reality.</p>
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Premium Quality</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Expert Guidance</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Fast Delivery</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Customer Care</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="deco-badge bottom-left">
-                        <div class="db-num">📦</div>
-                        <div class="db-label">Fast delivery</div>
+                    <div class="about-image">
+                        <div class="about-frame">
+                            <div class="about-placeholder">
+                                <i class="fas fa-image"></i>
+                                <span>Salon Gallery</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1997,7 +2084,7 @@
         <!-- Silk ribbon divider -->
         <div class="silk-divider">
             <svg viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 20 Q360 0 720 20 Q1080 40 1440 20 L1440 40 L0 40 Z" fill="#f3efe8"/>
+                <path d="M0 20 Q360 0 720 20 Q1080 40 1440 20 L1440 40 L0 40 Z" fill="#f8f4f4"/>
             </svg>
         </div>
 

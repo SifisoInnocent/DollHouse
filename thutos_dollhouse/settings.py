@@ -17,15 +17,11 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-!xtir!@u(@^fw9d6b(%ui
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Configure ALLOWED_HOSTS
-_allowed_hosts = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
-ALLOWED_HOSTS = list(_allowed_hosts)
-
-# Add Render production hosts
-if not DEBUG:
-    ALLOWED_HOSTS.extend([
-        'dollhouse-pued.onrender.com',
-        '.onrender.com',
-    ])
+# In production, use environment variable or fallback to wildcard
+if DEBUG:
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+else:
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*.onrender.com', cast=Csv())
 
 # Application definition
 INSTALLED_APPS = [

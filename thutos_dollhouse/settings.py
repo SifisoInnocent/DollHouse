@@ -20,16 +20,33 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 _allowed_hosts = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
 ALLOWED_HOSTS = list(_allowed_hosts)
 
-# Add Render host dynamically
+# Add Render host dynamically - try multiple Render environment variables
 if not DEBUG:
     from urllib.parse import urlparse
     from os import environ
-    render_url = environ.get('RENDER_EXTERNAL_URL', '')
-    if render_url:
-        parsed = urlparse(render_url)
-        host = parsed.netloc.split(':')[0]
-        if host not in ALLOWED_HOSTS:
-            ALLOWED_HOSTS.append(host)
+    
+    # Try different Render environment variables
+    render_urls = [
+        environ.get('RENDER_EXTERNAL_URL', ''),
+        environ.get('RENDER_SERVICE_URL', ''),
+        environ.get('PUBLIC_URL', ''),
+    ]
+    
+    for render_url in render_urls:
+        if render_url:
+            parsed = urlparse(render_url)
+            host = parsed.netloc.split(':')[0]
+            if host and host not in ALLOWED_HOSTS:
+                ALLOWED_HOSTS.append(host)
+    
+    # Also add from RENDER_SERVICE_HOST if available
+    render_host = environ.get('RENDER_SERVICE_HOST', '')
+    if render_host and render_host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(render_host)
+    
+    # Fallback: Allow any .onrender.com host in production
+    if not any('.onrender.com' in host for host in ALLOWED_HOSTS):
+        ALLOWED_HOSTS.append('.onrender.com')
 
 # Application definition
 INSTALLED_APPS = [

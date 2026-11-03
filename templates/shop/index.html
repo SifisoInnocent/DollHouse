@@ -2741,6 +2741,25 @@
             }
         }
 
+        async function loadOwnerImage() {
+            try {
+                const res = await fetch('/api/owner-image/');
+                const data = await res.json();
+                const ownerImg = $('ownerImg');
+                if (ownerImg && data.ownerPhoto) {
+                    console.log('Setting owner image from dedicated endpoint:', data.ownerPhoto);
+                    ownerImg.src = data.ownerPhoto;
+                    ownerImg.style.display = 'block';
+                } else if (ownerImg) {
+                    console.log('No owner photo, using default');
+                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
+                    ownerImg.style.display = 'block';
+                }
+            } catch (err) {
+                console.error("Failed to load owner image:", err);
+            }
+        }
+
         async function loadSettings() {
             try {
                 const res = await fetch('/api/settings/');
@@ -2753,16 +2772,7 @@
                 };
                 
                 // Load owner image
-                const ownerImg = $('ownerImg');
-                if (ownerImg && data.ownerPhoto) {
-                    console.log('Setting owner image:', data.ownerPhoto);
-                    ownerImg.src = data.ownerPhoto;
-                    ownerImg.style.display = 'block';
-                } else if (ownerImg) {
-                    console.log('No owner photo, using default');
-                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
-                    ownerImg.style.display = 'block';
-                }
+                loadOwnerImage();
 
                 // Load salon images into slideshow
                 if (data.salonImages && data.salonImages.length === 4) {
@@ -3347,15 +3357,15 @@
 
             try {
                 toast('Uploading owner photo...', 'info');
-                const res = await fetch('/api/settings/', {
+                const res = await fetch('/api/owner-image/', {
                     method: 'POST',
                     body: formData
                 });
                 if (res.ok) {
                     const data = await res.json();
                     console.log('Owner photo saved, response:', data);
-                    // Reload settings to get the updated image URL
-                    await loadSettings();
+                    // Reload owner image from dedicated endpoint
+                    await loadOwnerImage();
                     toast('Owner photo saved! 📸', 'success');
                     // Clear the input
                     input.value = '';

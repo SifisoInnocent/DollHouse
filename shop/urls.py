@@ -12,6 +12,7 @@ urlpatterns = [
     
     # Configuration / Settings Endpoints
     path('api/settings/', views.api_settings, name='api_settings'),
+    path('api/owner-image/', views.api_owner_image, name='api_owner_image'),
     
     # Product CRUD Endpoints
     path('api/products/', views.api_products, name='api_products'),

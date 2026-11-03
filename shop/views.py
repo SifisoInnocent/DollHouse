@@ -241,6 +241,32 @@ def api_orders(request):
 
 # --- STORE SETTINGS APIS ---
 @csrf_exempt
+def api_owner_image(request):
+    """Simple endpoint to get/set owner image"""
+    settings = StoreSettings.objects.first()
+    if not settings:
+        settings = StoreSettings.objects.create()
+
+    if request.method == 'GET':
+        if settings.owner_photo:
+            return JsonResponse({'ownerPhoto': request.build_absolute_uri(settings.owner_photo.url)})
+        return JsonResponse({'ownerPhoto': ''})
+
+    elif request.method == 'POST':
+        if not (request.user.is_authenticated and request.user.is_staff):
+            return JsonResponse({'error': 'Unauthorized'}, status=403)
+
+        if 'ownerPhoto' in request.FILES:
+            settings.owner_photo = request.FILES['ownerPhoto']
+            settings.save()
+            print(f"DEBUG: Owner photo saved: {settings.owner_photo.name}")
+            return JsonResponse({'success': True, 'ownerPhoto': request.build_absolute_uri(settings.owner_photo.url)})
+
+        return JsonResponse({'error': 'No file uploaded'}, status=400)
+
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@csrf_exempt
 def api_settings(request):
     settings = StoreSettings.objects.first()
     if not settings:

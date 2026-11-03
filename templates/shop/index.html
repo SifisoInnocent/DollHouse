@@ -2121,13 +2121,7 @@
                     <div class="crown-frame">
                         <div class="frame-border"></div>
                         <div class="frame-inner">
-                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg"
-                            onerror="this.src='https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face'" />
-                            <div class="owner-placeholder" id="ownerPH" style="display:none;">
-                                <i class="fas fa-camera"></i>
-                                <span>Add Owner Photo</span>
-                                <small style="font-size:0.7rem;opacity:0.6;">Click to upload</small>
-                            </div>
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg" />
                         </div>
                     </div>
                     <div class="owner-tag"><i class="fas fa-crown"></i> Thuto · Owner</div>
@@ -2763,11 +2757,6 @@
                     ownerImg.src = data.ownerPhoto;
                     ownerImg.style.display = 'block';
                     if (ownerPH) ownerPH.style.display = 'none';
-                } else {
-                    // Keep the default image if no admin photo is set
-                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
-                    ownerImg.style.display = 'block';
-                    if (ownerPH) ownerPH.style.display = 'none';
                 }
 
                 // Load salon images into slideshow
@@ -3364,12 +3353,17 @@
                         ownerImg.src = data.ownerPhoto;
                         ownerImg.style.display = 'block';
                         if (ownerPH) ownerPH.style.display = 'none';
+                        toast('Owner photo saved! 📸', 'success');
+                    } else {
+                        toast('Owner photo saved but URL not returned', 'success');
+                        // Reload settings to get the image
+                        await loadSettings();
                     }
-                    toast('Owner photo saved! 📸', 'success');
                 } else {
                     toast('Failed to save owner photo', 'error');
                 }
             } catch (err) {
+                console.error('Error:', err);
                 toast('Connection error', 'error');
             }
         }
@@ -3813,48 +3807,7 @@
                 }
             });
 
-            // Owner Image click to change
-            const ownerPH = $('ownerPH');
-            const ownerImg = $('ownerImg');
-            if (ownerPH && ownerImg) {
-                const triggerUpload = () => {
-                    if (!isAdmin) {
-                        toast('Admin credentials required to modify owner photo', 'info');
-                        return;
-                    }
-                    const input = document.createElement('input');
-                    input.type = 'file';
-                    input.accept = 'image/*';
-                    input.onchange = async function(e) {
-                        const file = e.target.files[0];
-                        if (!file) return;
-                        const formData = new FormData();
-                        formData.append('ownerPhoto', file);
-                        try {
-                            const res = await fetch('/api/settings/', {
-                                method: 'POST',
-                                body: formData
-                            });
-                            if (res.ok) {
-                                const data = await res.json();
-                                if (data.ownerPhoto) {
-                                    ownerImg.src = data.ownerPhoto;
-                                    ownerImg.style.display = 'block';
-                                    ownerPH.style.display = 'none';
-                                    toast('Owner photo updated! 📸', 'success');
-                                }
-                            } else {
-                                toast('Failed to upload owner photo', 'error');
-                            }
-                        } catch (err) {
-                            toast('Connection error', 'error');
-                        }
-                    };
-                    input.click();
-                };
-                ownerPH.addEventListener('click', triggerUpload);
-                ownerImg.addEventListener('click', triggerUpload);
-            }
+            // Owner Image click to change - removed, use admin panel instead
 
             toast('✨ Welcome to Thuto\'s Dollhouse!', 'info');
         });

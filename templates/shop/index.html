@@ -2121,7 +2121,8 @@
                     <div class="crown-frame">
                         <div class="frame-border"></div>
                         <div class="frame-inner">
-                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg" />
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg"
+                            onerror="console.error('Owner image failed to load'); this.src='https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';" />
                         </div>
                     </div>
                     <div class="owner-tag"><i class="fas fa-crown"></i> Thuto · Owner</div>
@@ -2751,12 +2752,16 @@
                     ownerEmail: data.ownerEmail
                 };
                 
+                // Load owner image
                 const ownerImg = $('ownerImg');
-                const ownerPH = $('ownerPH');
-                if (data.ownerPhoto) {
+                if (ownerImg && data.ownerPhoto) {
+                    console.log('Setting owner image:', data.ownerPhoto);
                     ownerImg.src = data.ownerPhoto;
                     ownerImg.style.display = 'block';
-                    if (ownerPH) ownerPH.style.display = 'none';
+                } else if (ownerImg) {
+                    console.log('No owner photo, using default');
+                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
+                    ownerImg.style.display = 'block';
                 }
 
                 // Load salon images into slideshow
@@ -3341,25 +3346,22 @@
             formData.append('ownerPhoto', input.files[0]);
 
             try {
+                toast('Uploading owner photo...', 'info');
                 const res = await fetch('/api/settings/', {
                     method: 'POST',
                     body: formData
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    if (data.ownerPhoto) {
-                        const ownerImg = $('ownerImg');
-                        const ownerPH = $('ownerPH');
-                        ownerImg.src = data.ownerPhoto;
-                        ownerImg.style.display = 'block';
-                        if (ownerPH) ownerPH.style.display = 'none';
-                        toast('Owner photo saved! 📸', 'success');
-                    } else {
-                        toast('Owner photo saved but URL not returned', 'success');
-                        // Reload settings to get the image
-                        await loadSettings();
-                    }
+                    console.log('Owner photo saved, response:', data);
+                    // Reload settings to get the updated image URL
+                    await loadSettings();
+                    toast('Owner photo saved! 📸', 'success');
+                    // Clear the input
+                    input.value = '';
                 } else {
+                    const errorText = await res.text();
+                    console.error('Failed to save:', errorText);
                     toast('Failed to save owner photo', 'error');
                 }
             } catch (err) {

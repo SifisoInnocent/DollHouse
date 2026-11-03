@@ -280,6 +280,7 @@ def api_settings(request):
                 settings.email_config_owner_email = request.POST.get('ownerEmail', settings.email_config_owner_email)
                 if 'ownerPhoto' in request.FILES:
                     settings.owner_photo = request.FILES['ownerPhoto']
+                    print(f"DEBUG: Owner photo uploaded: {settings.owner_photo.name}")
                 # Handle salon images
                 for i in range(1, 5):
                     field_name = f'salonImage{i}'
@@ -297,6 +298,9 @@ def api_settings(request):
             owner_photo_url = ""
             if settings.owner_photo:
                 owner_photo_url = request.build_absolute_uri(settings.owner_photo.url)
+                print(f"DEBUG: Owner photo URL: {owner_photo_url}")
+            else:
+                print("DEBUG: No owner photo set")
 
             salon_images = []
             for i in range(1, 5):

@@ -2458,21 +2458,6 @@
                             </div>
                         </div>
 
-                        <!-- Owner Image Config -->
-                        <div style="margin-top:32px;">
-                            <div class="form-section-title"><i class="fas fa-user-circle" style="color:var(--accent-primary);"></i> Owner Photo</div>
-                            <div class="admin-form">
-                                <div class="form-group">
-                                    <label>Upload Owner Photo</label>
-                                    <input type="file" id="ownerPhotoInput" accept="image/*" />
-                                </div>
-                                <button type="button" class="btn btn-rose btn-sm" onclick="saveOwnerPhoto()"><i class="fas fa-save"></i> Save Owner Photo</button>
-                                <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">
-                                    This photo will appear in the hero section
-                                </p>
-                            </div>
-                        </div>
-
                         <!-- Salon Images Config -->
                         <div style="margin-top:32px;">
                             <div class="form-section-title"><i class="fas fa-images" style="color:var(--accent-primary);"></i> Salon Gallery Images</div>
@@ -3413,42 +3398,6 @@
                     toast('Failed to save salon images', 'error');
                 }
             } catch (err) {
-                toast('Connection error', 'error');
-            }
-        }
-
-        async function saveOwnerPhoto() {
-            const input = $('ownerPhotoInput');
-            if (!input || !input.files[0]) {
-                toast('Please select an image', 'error');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('ownerPhoto', input.files[0]);
-
-            try {
-                toast('Uploading owner photo...', 'info');
-                // Use settings API (same as salon images)
-                const res = await fetch('/api/settings/', {
-                    method: 'POST',
-                    body: formData
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    console.log('Owner photo saved, response:', data);
-                    // Reload settings to get the updated image
-                    await loadSettings();
-                    toast('Owner photo saved! 📸', 'success');
-                    // Clear the input
-                    input.value = '';
-                } else {
-                    const errorText = await res.text();
-                    console.error('Failed to save:', errorText);
-                    toast('Failed to save owner photo', 'error');
-                }
-            } catch (err) {
-                console.error('Error:', err);
                 toast('Connection error', 'error');
             }
         }

@@ -1514,6 +1514,64 @@
             overflow-y: auto;
             animation: modalIn 0.35s ease;
         }
+        .order-modal {
+            max-width: 580px;
+        }
+        .order-product-card {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--bg-alt) 0%, var(--accent-primary-dim) 100%);
+            border-radius: 16px;
+            border: 2px solid var(--accent-primary);
+            box-shadow: var(--shadow-primary);
+        }
+        .order-product-name {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .order-product-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+        .order-product-price {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        .checkout-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            background: var(--accent-primary-dim);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+        .checkout-info i {
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+        }
+        .btn-checkout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 16px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .btn-checkout small {
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
         @keyframes modalIn {
             from {
                 opacity: 0;
@@ -2480,15 +2538,15 @@
 
     <!-- ══════════════ ORDER MODAL ══════════════ -->
     <div class="modal-overlay" id="orderModal">
-        <div class="modal">
+        <div class="modal order-modal">
             <div class="modal-header">
                 <h3><i class="fas fa-shopping-bag" style="color:var(--accent-primary);margin-right:8px;"></i> Place Order</h3>
                 <button class="modal-close" onclick="closeModal('orderModal')">&times;</button>
             </div>
-            <div id="orderProductInfo" style="margin-bottom:16px;padding:14px;background:var(--bg-alt);border-radius:10px;border:1px solid var(--border-light);">
-                <div id="oProductName" style="font-family:var(--font-serif);font-size:1.2rem;color:var(--text-primary);"></div>
-                <div id="oProductMeta" style="font-size:0.8rem;color:var(--text-muted);margin-top:2px;"></div>
-                <div id="oProductPrice" style="font-family:var(--font-serif);font-size:1.5rem;color:var(--accent-primary);margin-top:4px;"></div>
+            <div id="orderProductInfo" class="order-product-card">
+                <div id="oProductName" class="order-product-name"></div>
+                <div id="oProductMeta" class="order-product-meta"></div>
+                <div id="oProductPrice" class="order-product-price"></div>
             </div>
             <form id="orderForm" onsubmit="submitOrder(event)">
                 <div class="admin-form">
@@ -2497,11 +2555,24 @@
                     <div class="form-group"><label>Email (for confirmation)</label><input type="email" id="oEmail" placeholder="you@example.com" /></div>
                     <div class="form-group"><label>Notes (optional)</label><textarea id="oNotes" placeholder="Any special requests…" rows="2"></textarea></div>
                 </div>
-                <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:12px;">Choose how to send your order:</p>
+                <div class="checkout-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Your order will be sent directly to Thuto's WhatsApp for quick processing</span>
+                </div>
                 <div class="order-channels">
-                    <button type="submit" name="channel" value="whatsapp" class="btn btn-wa" onclick="pendingChannel='whatsapp'"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-                    <button type="submit" name="channel" value="email" class="btn btn-rose" onclick="pendingChannel='email'"><i class="fas fa-envelope"></i> Email</button>
-                    <button type="submit" name="channel" value="facebook" class="btn btn-fb" onclick="pendingChannel='facebook'"><i class="fab fa-facebook-messenger"></i> Messenger</button>
+                    <button type="submit" name="channel" value="whatsapp" class="btn btn-wa btn-checkout" onclick="pendingChannel='whatsapp'">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Order via WhatsApp</span>
+                        <small>Fastest Response</small>
+                    </button>
+                    <button type="submit" name="channel" value="email" class="btn btn-rose btn-checkout" onclick="pendingChannel='email'">
+                        <i class="fas fa-envelope"></i>
+                        <span>Order via Email</span>
+                    </button>
+                    <button type="submit" name="channel" value="facebook" class="btn btn-fb btn-checkout" onclick="pendingChannel='facebook'">
+                        <i class="fab fa-facebook-messenger"></i>
+                        <span>Order via Messenger</span>
+                    </button>
                 </div>
             </form>
         </div>
@@ -2509,7 +2580,7 @@
 
     <!-- ══════════════ CART MODAL ══════════════ -->
     <div class="modal-overlay" id="cartModal">
-        <div class="modal">
+        <div class="modal order-modal">
             <div class="modal-header">
                 <h3><i class="fas fa-shopping-bag" style="color:var(--accent-primary);margin-right:8px;"></i> Your Cart</h3>
                 <button class="modal-close" onclick="closeModal('cartModal')">&times;</button>
@@ -2519,11 +2590,25 @@
                 <span class="label">Total</span>
                 <span class="amount" id="cartTotalAmt">R0.00</span>
             </div>
+            <div class="checkout-info">
+                <i class="fas fa-info-circle"></i>
+                <span>Your order will be sent directly to Thuto's WhatsApp for quick processing</span>
+            </div>
             <div class="cart-checkout-btns">
-                <button class="btn btn-wa btn-block" onclick="cartCheckout('whatsapp')"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp</button>
-                <button class="btn btn-rose btn-block" onclick="cartCheckout('email')"><i class="fas fa-envelope"></i> Checkout via Email</button>
-                <button class="btn btn-fb btn-block" onclick="cartCheckout('facebook')"><i class="fab fa-facebook-messenger"></i> Checkout via Messenger</button>
-                <button class="btn btn-danger btn-sm" onclick="clearCart()" style="align-self:flex-start;">Clear Cart</button>
+                <button class="btn btn-wa btn-checkout btn-block" onclick="cartCheckout('whatsapp')">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Checkout via WhatsApp</span>
+                    <small>Fastest Response</small>
+                </button>
+                <button class="btn btn-rose btn-checkout btn-block" onclick="cartCheckout('email')">
+                    <i class="fas fa-envelope"></i>
+                    <span>Checkout via Email</span>
+                </button>
+                <button class="btn btn-fb btn-checkout btn-block" onclick="cartCheckout('facebook')">
+                    <i class="fab fa-facebook-messenger"></i>
+                    <span>Checkout via Messenger</span>
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="clearCart()" style="align-self:flex-start;margin-top:12px;">Clear Cart</button>
             </div>
         </div>
     </div>
@@ -3155,10 +3240,10 @@
             }, 0);
             let items = cart.map(item => {
                 const p = products.find(x => x.id === item.id);
-                const imageLink = p && p.image ? `\n📷 Image: ${p.image}` : '';
-                return `${p ? p.name : 'Unknown'} x${item.qty} (${formatCurrency(p ? p.price * item.qty : 0)})${imageLink}`;
+                const imageLink = p && p.image ? `\nImage: ${p.image}` : '';
+                return `• ${p ? p.name : 'Unknown'} x${item.qty} - ${formatCurrency(p ? p.price * item.qty : 0)}${imageLink}`;
             }).join('\n');
-            const msg = `🛍️ *NEW ORDER from Thuto's Dollhouse*\n\n📦 *Items:*\n${items}\n\n💰 *Total:* ${formatCurrency(total)}\n\n📱 *Cart Checkout*`;
+            const msg = `✨ *NEW ORDER - Thuto's Dollhouse*\n\n━━━━━━━━━━━━━━━━━━━━━\n📦 *Your Order:*\n${items}\n\n💰 *Total: ${formatCurrency(total)}*\n━━━━━━━━━━━━━━━━━━━━━\n👤 Please provide your:\n• Name\n• Phone number\n• Delivery address\n\nThank you for shopping with us! 💕`;
 
             try {
                 const res = await fetch('/api/orders/', {
@@ -3213,8 +3298,8 @@
             if (!name || !phone) { toast('Please fill in name and phone', 'error'); return; }
             const p = products.find(x => x.id === currentOrderProductId);
             if (!p) { toast('Product not found', 'error'); return; }
-            const imageLink = p.image ? `\n📷 Image: ${p.image}` : '';
-            const msg = `🛍️ *NEW ORDER from Thuto's Dollhouse*\n\n👤 *Customer:* ${name}\n📱 *Phone:* ${phone}\n${email ? '📧 *Email:* ' + email + '\n' : ''}📦 *Product:* ${p.name}\n💰 *Price:* ${formatCurrency(p.price)}${imageLink}\n${notes ? '📝 *Notes:* ' + notes : ''}`;
+            const imageLink = p.image ? `\nImage: ${p.image}` : '';
+            const msg = `✨ *NEW ORDER - Thuto's Dollhouse*\n\n━━━━━━━━━━━━━━━━━━━━━\n👤 *Customer Details:*\n• Name: ${name}\n• Phone: ${phone}\n${email ? `• Email: ${email}\n` : ''}${notes ? `• Notes: ${notes}\n` : ''}\n━━━━━━━━━━━━━━━━━━━━━\n📦 *Product:*\n• ${p.name}\n• Price: ${formatCurrency(p.price)}${imageLink}\n━━━━━━━━━━━━━━━━━━━━━\n\nThank you for your order! 💕`;
             const channel = pendingChannel;
 
             try {

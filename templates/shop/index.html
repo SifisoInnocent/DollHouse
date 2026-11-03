@@ -2812,15 +2812,6 @@
                     ownerEmail: data.ownerEmail
                 };
                 
-                // Load owner image (using settings API like salon images)
-                if (data.ownerPhoto && data.ownerPhoto !== '') {
-                    const ownerImg = $('ownerImg');
-                    if (ownerImg) {
-                        console.log('Setting owner image from settings:', data.ownerPhoto);
-                        ownerImg.src = data.ownerPhoto;
-                    }
-                }
-
                 // Load salon images into slideshow
                 if (data.salonImages && data.salonImages.length === 4) {
                     for (let i = 0; i < 4; i++) {

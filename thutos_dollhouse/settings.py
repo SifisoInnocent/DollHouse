@@ -106,6 +106,19 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Cloudinary Configuration for persistent image storage
+CLOUDINARY_URL = config('CLOUDINARY_URL', default='')
+if CLOUDINARY_URL:
+    import cloudinary
+    import cloudinary.storage
+    cloudinary.config(cloud_name=config('CLOUDINARY_CLOUD_NAME', default=''),
+                     api_key=config('CLOUDINARY_API_KEY', default=''),
+                     api_secret=config('CLOUDINARY_API_SECRET', default=''))
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    # Fallback to local storage for development
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

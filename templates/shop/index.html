@@ -2157,6 +2157,15 @@
     <section id="page-home">
         <div class="hero">
             <div class="container hero-grid">
+                <div class="hero-visual">
+                    <div class="crown-frame">
+                        <div class="frame-border"></div>
+                        <div class="frame-inner">
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg" />
+                        </div>
+                    </div>
+                    <div class="owner-tag"><i class="fas fa-crown"></i> Thuto · Owner</div>
+                </div>
                 <div class="hero-content">
                     <div class="hero-eyebrow">Premium Hair & Beauty · South Africa</div>
                     <h1 class="hero-h1">
@@ -2174,16 +2183,6 @@
                         <div class="hero-stat"><div class="num">⭐ 5</div><div class="label">Rating</div></div>
                         <div class="hero-stat"><div class="num">24/7</div><div class="label">Support</div></div>
                     </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="crown-frame">
-                        <div class="frame-border"></div>
-                        <div class="frame-inner">
-                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg"
-                            onerror="console.error('Owner image failed to load'); this.src='https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';" />
-                        </div>
-                    </div>
-                    <div class="owner-tag"><i class="fas fa-crown"></i> Thuto · Owner</div>
                 </div>
             </div>
         </div>
@@ -2831,10 +2830,14 @@
                 const res = await fetch('/api/owner-image/');
                 const data = await res.json();
                 const ownerImg = $('ownerImg');
-                if (ownerImg && data.ownerPhoto) {
+                if (ownerImg && data.ownerPhoto && data.ownerPhoto !== '') {
                     console.log('Setting owner image from dedicated endpoint:', data.ownerPhoto);
                     ownerImg.src = data.ownerPhoto;
                     ownerImg.style.display = 'block';
+                    ownerImg.onerror = function() {
+                        console.error('Owner image failed to load, using default');
+                        this.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
+                    };
                 } else if (ownerImg) {
                     console.log('No owner photo, using default');
                     ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
@@ -2842,6 +2845,10 @@
                 }
             } catch (err) {
                 console.error("Failed to load owner image:", err);
+                const ownerImg = $('ownerImg');
+                if (ownerImg) {
+                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
+                }
             }
         }
 

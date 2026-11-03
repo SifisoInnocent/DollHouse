@@ -110,7 +110,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CLOUDINARY_URL = config('CLOUDINARY_URL', default='')
 if CLOUDINARY_URL:
     import cloudinary
-    import cloudinary.storage
+    from cloudinary_storage.storage import MediaCloudinaryStorage
     cloudinary.config(cloud_name=config('CLOUDINARY_CLOUD_NAME', default=''),
                      api_key=config('CLOUDINARY_API_KEY', default=''),
                      api_secret=config('CLOUDINARY_API_SECRET', default=''))

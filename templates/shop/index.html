@@ -2825,33 +2825,6 @@
             }
         }
 
-        async function loadOwnerImage() {
-            try {
-                const res = await fetch('/api/owner-image/');
-                const data = await res.json();
-                const ownerImg = $('ownerImg');
-                if (ownerImg && data.ownerPhoto && data.ownerPhoto !== '') {
-                    console.log('Setting owner image from dedicated endpoint:', data.ownerPhoto);
-                    ownerImg.src = data.ownerPhoto;
-                    ownerImg.style.display = 'block';
-                    ownerImg.onerror = function() {
-                        console.error('Owner image failed to load, using default');
-                        this.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
-                    };
-                } else if (ownerImg) {
-                    console.log('No owner photo, using default');
-                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
-                    ownerImg.style.display = 'block';
-                }
-            } catch (err) {
-                console.error("Failed to load owner image:", err);
-                const ownerImg = $('ownerImg');
-                if (ownerImg) {
-                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
-                }
-            }
-        }
-
         async function loadSettings() {
             try {
                 const res = await fetch('/api/settings/');

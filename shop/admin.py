@@ -22,3 +22,20 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(StoreSettings)
 class StoreSettingsAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'email_config_owner_email')
+    fieldsets = (
+        ('Email Configuration', {
+            'fields': ('email_config_key', 'email_config_service', 'email_config_template', 'email_config_owner_email')
+        }),
+        ('Owner Image', {
+            'fields': ('owner_photo',)
+        }),
+        ('Salon Gallery', {
+            'fields': ('salon_image_1', 'salon_image_2', 'salon_image_3', 'salon_image_4')
+        }),
+    )
+
+    def has_add_permission(self, request):
+        # Only allow one instance
+        if self.model.objects.exists():
+            return False
+        return super().has_add_permission(request)

@@ -60,6 +60,10 @@ class StoreSettings(models.Model):
     email_config_template = models.CharField(max_length=255, blank=True, default="")
     email_config_owner_email = models.EmailField(blank=True, default="")
     owner_photo = models.ImageField(upload_to='settings/', blank=True, null=True)
+    salon_image_1 = models.ImageField(upload_to='salon/', blank=True, null=True, verbose_name="Salon Image 1")
+    salon_image_2 = models.ImageField(upload_to='salon/', blank=True, null=True, verbose_name="Salon Image 2")
+    salon_image_3 = models.ImageField(upload_to='salon/', blank=True, null=True, verbose_name="Salon Image 3")
+    salon_image_4 = models.ImageField(upload_to='salon/', blank=True, null=True, verbose_name="Salon Image 4")
 
     def __str__(self):
         return "Store Settings"

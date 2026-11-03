@@ -732,6 +732,49 @@
             font-size: 3rem;
             opacity: 0.4;
         }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            font-weight: 500;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
         @media (max-width: 768px) {
             .about-section {
                 grid-template-columns: 1fr;
@@ -2080,6 +2123,35 @@
             </div>
         </div>
 
+        <!-- SALON GALLERY SECTION -->
+        <div class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-eyebrow">Our Gallery</div>
+                    <h2>Beauty in Every Detail</h2>
+                    <p>Step into our world of elegance and transformation</p>
+                </div>
+                <div class="gallery-grid" id="salonGallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=300&fit=crop" alt="Salon" id="salonImg1" />
+                        <div class="gallery-overlay"><span>Premium Atmosphere</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=300&fit=crop" alt="Salon" id="salonImg2" />
+                        <div class="gallery-overlay"><span>Expert Styling</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=400&h=300&fit=crop" alt="Salon" id="salonImg3" />
+                        <div class="gallery-overlay"><span>Quality Products</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=400&h=300&fit=crop" alt="Salon" id="salonImg4" />
+                        <div class="gallery-overlay"><span>Personalized Care</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Silk ribbon divider -->
         <div class="silk-divider">
             <svg viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2278,6 +2350,33 @@
                                 <button type="button" class="btn btn-rose btn-sm" onclick="saveEmailConfig()"><i class="fas fa-save"></i> Save Config</button>
                                 <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">
                                     Free at <a href="https://emailjs.com" target="_blank" style="color:var(--accent-primary);">emailjs.com</a> · 200 emails/month free
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Salon Images Config -->
+                        <div style="margin-top:32px;">
+                            <div class="form-section-title"><i class="fas fa-images" style="color:var(--accent-primary);"></i> Salon Gallery Images</div>
+                            <div class="admin-form">
+                                <div class="form-group">
+                                    <label>Salon Image 1</label>
+                                    <input type="file" id="salonImage1" accept="image/*" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Salon Image 2</label>
+                                    <input type="file" id="salonImage2" accept="image/*" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Salon Image 3</label>
+                                    <input type="file" id="salonImage3" accept="image/*" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Salon Image 4</label>
+                                    <input type="file" id="salonImage4" accept="image/*" />
+                                </div>
+                                <button type="button" class="btn btn-rose btn-sm" onclick="saveSalonImages()"><i class="fas fa-save"></i> Save Salon Images</button>
+                                <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">
+                                    Upload images to display in the salon gallery section
                                 </p>
                             </div>
                         </div>
@@ -2594,6 +2693,16 @@
                         ownerImg.style.display = 'block';
                     }
                     if (ownerPH) ownerPH.style.display = 'none';
+                }
+
+                // Load salon images
+                if (data.salonImages && data.salonImages.length === 4) {
+                    for (let i = 0; i < 4; i++) {
+                        const salonImg = $(`salonImg${i + 1}`);
+                        if (salonImg && data.salonImages[i]) {
+                            salonImg.src = data.salonImages[i];
+                        }
+                    }
                 }
             } catch (err) {
                 console.error("Failed to load settings:", err);
@@ -3122,6 +3231,39 @@
             $('ejsService').value = emailConfig.service || '';
             $('ejsTemplate').value = emailConfig.template || '';
             $('ejsOwnerEmail').value = emailConfig.ownerEmail || '';
+        }
+
+        async function saveSalonImages() {
+            const formData = new FormData();
+            for (let i = 1; i <= 4; i++) {
+                const input = $(`salonImage${i}`);
+                if (input && input.files[0]) {
+                    formData.append(`salonImage${i}`, input.files[0]);
+                }
+            }
+
+            try {
+                const res = await fetch('/api/settings/', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.salonImages) {
+                        for (let i = 0; i < 4; i++) {
+                            const salonImg = $(`salonImg${i + 1}`);
+                            if (salonImg && data.salonImages[i]) {
+                                salonImg.src = data.salonImages[i];
+                            }
+                        }
+                    }
+                    toast('Salon images saved! 📸', 'success');
+                } else {
+                    toast('Failed to save salon images', 'error');
+                }
+            } catch (err) {
+                toast('Connection error', 'error');
+            }
         }
 
         /* ─── ADMIN PRODUCT CRUD ─── */

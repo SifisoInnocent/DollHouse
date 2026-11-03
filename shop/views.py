@@ -250,12 +250,22 @@ def api_settings(request):
         owner_photo_url = ""
         if settings.owner_photo:
             owner_photo_url = request.build_absolute_uri(settings.owner_photo.url)
+
+        salon_images = []
+        for i in range(1, 5):
+            img_field = getattr(settings, f'salon_image_{i}', None)
+            if img_field:
+                salon_images.append(request.build_absolute_uri(img_field.url))
+            else:
+                salon_images.append("")
+
         return JsonResponse({
             'key': settings.email_config_key,
             'service': settings.email_config_service,
             'template': settings.email_config_template,
             'ownerEmail': settings.email_config_owner_email,
-            'ownerPhoto': owner_photo_url
+            'ownerPhoto': owner_photo_url,
+            'salonImages': salon_images
         })
         
     elif request.method == 'POST':
@@ -270,6 +280,11 @@ def api_settings(request):
                 settings.email_config_owner_email = request.POST.get('ownerEmail', settings.email_config_owner_email)
                 if 'ownerPhoto' in request.FILES:
                     settings.owner_photo = request.FILES['ownerPhoto']
+                # Handle salon images
+                for i in range(1, 5):
+                    field_name = f'salonImage{i}'
+                    if field_name in request.FILES:
+                        setattr(settings, f'salon_image_{i}', request.FILES[field_name])
                 settings.save()
             else:
                 data = json.loads(request.body)
@@ -278,18 +293,27 @@ def api_settings(request):
                 settings.email_config_template = data.get('template', settings.email_config_template)
                 settings.email_config_owner_email = data.get('ownerEmail', settings.email_config_owner_email)
                 settings.save()
-                
+
             owner_photo_url = ""
             if settings.owner_photo:
                 owner_photo_url = request.build_absolute_uri(settings.owner_photo.url)
-                
+
+            salon_images = []
+            for i in range(1, 5):
+                img_field = getattr(settings, f'salon_image_{i}', None)
+                if img_field:
+                    salon_images.append(request.build_absolute_uri(img_field.url))
+                else:
+                    salon_images.append("")
+
             return JsonResponse({
                 'success': True,
                 'key': settings.email_config_key,
                 'service': settings.email_config_service,
                 'template': settings.email_config_template,
                 'ownerEmail': settings.email_config_owner_email,
-                'ownerPhoto': owner_photo_url
+                'ownerPhoto': owner_photo_url,
+                'salonImages': salon_images
             })
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)

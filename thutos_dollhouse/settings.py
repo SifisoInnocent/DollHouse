@@ -111,9 +111,7 @@ CLOUDINARY_URL = config('CLOUDINARY_URL', default='')
 if CLOUDINARY_URL:
     import cloudinary
     from cloudinary_storage.storage import MediaCloudinaryStorage
-    cloudinary.config(cloud_name=config('CLOUDINARY_CLOUD_NAME', default=''),
-                     api_key=config('CLOUDINARY_API_KEY', default=''),
-                     api_secret=config('CLOUDINARY_API_SECRET', default=''))
+    cloudinary.config_from_url(CLOUDINARY_URL)
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 else:
     # Fallback to local storage for development

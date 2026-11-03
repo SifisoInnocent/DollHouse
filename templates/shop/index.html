@@ -2028,8 +2028,7 @@
                     <div class="crown-frame">
                         <div class="frame-border"></div>
                         <div class="frame-inner">
-                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg"
-                            onerror="this.style.display='none';document.getElementById('ownerPH').style.display='flex';" />
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg" />
                             <div class="owner-placeholder" id="ownerPH" style="display:none;">
                                 <i class="fas fa-camera"></i>
                                 <span>Add Owner Photo</span>
@@ -2590,8 +2589,11 @@
                     ownerImg.style.display = 'block';
                     if (ownerPH) ownerPH.style.display = 'none';
                 } else {
-                    ownerImg.style.display = 'none';
-                    if (ownerPH) ownerPH.style.display = 'flex';
+                    // Keep the default image if no admin photo is set
+                    if (ownerImg.src && ownerImg.src !== window.location.href) {
+                        ownerImg.style.display = 'block';
+                    }
+                    if (ownerPH) ownerPH.style.display = 'none';
                 }
             } catch (err) {
                 console.error("Failed to load settings:", err);

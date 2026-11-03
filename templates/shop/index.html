@@ -732,48 +732,98 @@
             font-size: 3rem;
             opacity: 0.4;
         }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
-        }
-        .gallery-item {
+        .slideshow-container {
             position: relative;
-            aspect-ratio: 4/3;
-            border-radius: 16px;
+            max-width: 900px;
+            margin: 32px auto 0;
+            border-radius: 20px;
             overflow: hidden;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-        .gallery-item:hover {
-            transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
         }
-        .gallery-item img {
+        .slideshow-wrapper {
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
         }
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        .gallery-overlay {
+        .slide-caption {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: white;
+            font-size: 1.3rem;
             font-weight: 500;
-            opacity: 0;
+            font-family: var(--font-serif);
+        }
+        .slideshow-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+            z-index: 10;
+        }
+        .slideshow-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .slideshow-nav.prev {
+            left: 20px;
+        }
+        .slideshow-nav.next {
+            right: 20px;
+        }
+        .slideshow-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
             transition: var(--transition);
         }
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
+        .dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        .dot:hover {
+            background: rgba(255,255,255,0.8);
         }
         @media (max-width: 768px) {
             .about-section {
@@ -2123,7 +2173,7 @@
             </div>
         </div>
 
-        <!-- SALON GALLERY SECTION -->
+        <!-- SALON GALLERY SLIDESHOW SECTION -->
         <div class="section">
             <div class="container">
                 <div class="section-header">
@@ -2131,22 +2181,32 @@
                     <h2>Beauty in Every Detail</h2>
                     <p>Step into our world of elegance and transformation</p>
                 </div>
-                <div class="gallery-grid" id="salonGallery">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=300&fit=crop" alt="Salon" id="salonImg1" />
-                        <div class="gallery-overlay"><span>Premium Atmosphere</span></div>
+                <div class="slideshow-container">
+                    <div class="slideshow-wrapper">
+                        <div class="slide active">
+                            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=500&fit=crop" alt="Salon" id="salonImg1" />
+                            <div class="slide-caption">Premium Atmosphere</div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&h=500&fit=crop" alt="Salon" id="salonImg2" />
+                            <div class="slide-caption">Expert Styling</div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800&h=500&fit=crop" alt="Salon" id="salonImg3" />
+                            <div class="slide-caption">Quality Products</div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=800&h=500&fit=crop" alt="Salon" id="salonImg4" />
+                            <div class="slide-caption">Personalized Care</div>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=300&fit=crop" alt="Salon" id="salonImg2" />
-                        <div class="gallery-overlay"><span>Expert Styling</span></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=400&h=300&fit=crop" alt="Salon" id="salonImg3" />
-                        <div class="gallery-overlay"><span>Quality Products</span></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=400&h=300&fit=crop" alt="Salon" id="salonImg4" />
-                        <div class="gallery-overlay"><span>Personalized Care</span></div>
+                    <button class="slideshow-nav prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slideshow-nav next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                    <div class="slideshow-dots">
+                        <span class="dot active" onclick="goToSlide(0)"></span>
+                        <span class="dot" onclick="goToSlide(1)"></span>
+                        <span class="dot" onclick="goToSlide(2)"></span>
+                        <span class="dot" onclick="goToSlide(3)"></span>
                     </div>
                 </div>
             </div>
@@ -2354,6 +2414,21 @@
                             </div>
                         </div>
 
+                        <!-- Owner Image Config -->
+                        <div style="margin-top:32px;">
+                            <div class="form-section-title"><i class="fas fa-user-circle" style="color:var(--accent-primary);"></i> Owner Photo</div>
+                            <div class="admin-form">
+                                <div class="form-group">
+                                    <label>Upload Owner Photo</label>
+                                    <input type="file" id="ownerPhotoInput" accept="image/*" />
+                                </div>
+                                <button type="button" class="btn btn-rose btn-sm" onclick="saveOwnerPhoto()"><i class="fas fa-save"></i> Save Owner Photo</button>
+                                <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">
+                                    This photo will appear in the hero section
+                                </p>
+                            </div>
+                        </div>
+
                         <!-- Salon Images Config -->
                         <div style="margin-top:32px;">
                             <div class="form-section-title"><i class="fas fa-images" style="color:var(--accent-primary);"></i> Salon Gallery Images</div>
@@ -2376,7 +2451,7 @@
                                 </div>
                                 <button type="button" class="btn btn-rose btn-sm" onclick="saveSalonImages()"><i class="fas fa-save"></i> Save Salon Images</button>
                                 <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">
-                                    Upload images to display in the salon gallery section
+                                    Upload images to display in the salon gallery slideshow
                                 </p>
                             </div>
                         </div>
@@ -2695,7 +2770,7 @@
                     if (ownerPH) ownerPH.style.display = 'none';
                 }
 
-                // Load salon images
+                // Load salon images into slideshow
                 if (data.salonImages && data.salonImages.length === 4) {
                     for (let i = 0; i < 4; i++) {
                         const salonImg = $(`salonImg${i + 1}`);
@@ -3266,6 +3341,39 @@
             }
         }
 
+        async function saveOwnerPhoto() {
+            const input = $('ownerPhotoInput');
+            if (!input || !input.files[0]) {
+                toast('Please select an image', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('ownerPhoto', input.files[0]);
+
+            try {
+                const res = await fetch('/api/settings/', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.ownerPhoto) {
+                        const ownerImg = $('ownerImg');
+                        const ownerPH = $('ownerPH');
+                        ownerImg.src = data.ownerPhoto;
+                        ownerImg.style.display = 'block';
+                        if (ownerPH) ownerPH.style.display = 'none';
+                    }
+                    toast('Owner photo saved! 📸', 'success');
+                } else {
+                    toast('Failed to save owner photo', 'error');
+                }
+            } catch (err) {
+                toast('Connection error', 'error');
+            }
+        }
+
         /* ─── ADMIN PRODUCT CRUD ─── */
         function openAddProduct(category) {
             if (!isAdmin) { openLoginModal(); return; }
@@ -3548,10 +3656,47 @@
             }
         }
 
+        /* ─── SLIDESHOW ─── */
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+        function startSlideshow() {
+            slideInterval = setInterval(() => {
+                changeSlide(1);
+            }, 5000); // Change slide every 5 seconds
+        }
+
+        function stopSlideshow() {
+            clearInterval(slideInterval);
+        }
+
         /* ─── ON DOM LOAD ─── */
         document.addEventListener('DOMContentLoaded', async function() {
             // Theme setup
             initTheme();
+
+            // Start slideshow
+            startSlideshow();
 
             // Load resources from APIs
             await checkAuthStatus();

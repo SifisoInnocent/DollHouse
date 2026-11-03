@@ -2121,7 +2121,8 @@
                     <div class="crown-frame">
                         <div class="frame-border"></div>
                         <div class="frame-inner">
-                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg" />
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face" alt="Thuto – Owner" id="ownerImg"
+                            onerror="this.src='https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face'" />
                             <div class="owner-placeholder" id="ownerPH" style="display:none;">
                                 <i class="fas fa-camera"></i>
                                 <span>Add Owner Photo</span>
@@ -2764,9 +2765,8 @@
                     if (ownerPH) ownerPH.style.display = 'none';
                 } else {
                     // Keep the default image if no admin photo is set
-                    if (ownerImg.src && ownerImg.src !== window.location.href) {
-                        ownerImg.style.display = 'block';
-                    }
+                    ownerImg.src = 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop&crop=face';
+                    ownerImg.style.display = 'block';
                     if (ownerPH) ownerPH.style.display = 'none';
                 }
 

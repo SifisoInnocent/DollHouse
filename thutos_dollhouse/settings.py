@@ -106,22 +106,20 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Cloudinary Configuration for persistent image storage (production only)
-if not DEBUG:
-    CLOUDINARY_URL = config('CLOUDINARY_URL', default='')
-    if CLOUDINARY_URL:
-        try:
-            import cloudinary
-            from cloudinary_storage.storage import MediaCloudinaryStorage
-            cloudinary.config_from_url(CLOUDINARY_URL)
-            DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-        except Exception as e:
-            print(f"Cloudinary config error: {e}")
-            DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-    else:
+# Cloudinary Configuration for persistent image storage
+CLOUDINARY_URL = config('CLOUDINARY_URL', default='')
+if CLOUDINARY_URL:
+    try:
+        import cloudinary
+        from cloudinary_storage.storage import MediaCloudinaryStorage
+        cloudinary.config_from_url(CLOUDINARY_URL)
+        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        print("Cloudinary activated - images will persist")
+    except Exception as e:
+        print(f"Cloudinary config error: {e} - using local storage")
         DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 else:
-    # Local storage for development
+    print("CLOUDINARY_URL not set - using local storage")
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # Default primary key field type

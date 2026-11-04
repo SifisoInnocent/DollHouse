@@ -112,9 +112,30 @@ if CLOUDINARY_URL:
     try:
         import cloudinary
         from cloudinary_storage.storage import MediaCloudinaryStorage
-        cloudinary.config_from_url(CLOUDINARY_URL)
-        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-        print("Cloudinary activated - images will persist")
+        # Parse CLOUDINARY_URL manually: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+        if CLOUDINARY_URL.startswith('cloudinary://'):
+            url_without_prefix = CLOUDINARY_URL.replace('cloudinary://', '')
+            credentials_and_cloud = url_without_prefix.split('@')
+            if len(credentials_and_cloud) == 2:
+                credentials = credentials_and_cloud[0]
+                cloud_name = credentials_and_cloud[1]
+                api_key_and_secret = credentials.split(':')
+                if len(api_key_and_secret) == 2:
+                    api_key = api_key_and_secret[0]
+                    api_secret = api_key_and_secret[1]
+                    cloudinary.config(
+                        cloud_name=cloud_name,
+                        api_key=api_key,
+                        api_secret=api_secret
+                    )
+                    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+                    print("Cloudinary activated - images will persist")
+                else:
+                    raise ValueError("Invalid CLOUDINARY_URL: API key and secret not properly separated")
+            else:
+                raise ValueError("Invalid CLOUDINARY_URL: Missing @ separator")
+        else:
+            raise ValueError("CLOUDINARY_URL must start with cloudinary://")
     except Exception as e:
         print(f"Cloudinary config error: {e} - using local storage")
         DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'

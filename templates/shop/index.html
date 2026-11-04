@@ -1873,40 +1873,39 @@
 
         /* ══════════════ CATALOG PAGE ══════════════ */
         .catalog-page {
-            padding: calc(var(--header-h) + 60px) 40px 80px;
+            padding: calc(var(--header-h) + 40px) 20px 60px;
             max-width: 1400px;
             margin: 0 auto;
         }
         .catalog-header {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .catalog-header h1 {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 20px;
         }
         .catalog-search {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 12px;
         }
         .catalog-search input,
         .catalog-search select {
-            padding: 12px 20px;
+            padding: 14px 16px;
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
             background: var(--bg-input);
             color: var(--text-primary);
             font-family: var(--font-body);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             outline: none;
             transition: var(--transition);
         }
         .catalog-search input {
-            flex: 1;
-            min-width: 200px;
+            width: 100%;
         }
         .catalog-search input:focus,
         .catalog-search select:focus {
@@ -1914,37 +1913,37 @@
         }
         .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
         }
         .catalog-card {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
-            padding: 24px;
+            padding: 20px;
             transition: var(--transition);
         }
         .catalog-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-md);
             border-color: var(--accent-primary);
         }
         .catalog-card-icon {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
             background: var(--accent-primary-dim);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--accent-primary);
-            font-size: 1.5rem;
-            margin-bottom: 16px;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
         }
         .catalog-card h3 {
             font-family: var(--font-display);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 8px;
@@ -1953,25 +1952,26 @@
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.5;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .catalog-card-meta {
             display: flex;
             justify-content: space-between;
             font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .catalog-card-btn {
             background: var(--accent-primary);
             color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: var(--radius);
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             width: 100%;
+            font-size: 0.95rem;
         }
         .catalog-card-btn:hover {
             background: var(--accent-primary-light);
@@ -1980,10 +1980,11 @@
             display: flex;
             justify-content: center;
             gap: 8px;
+            flex-wrap: wrap;
         }
         .catalog-pagination span {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1991,11 +1992,30 @@
             cursor: pointer;
             transition: var(--transition);
             color: var(--text-secondary);
+            font-size: 0.95rem;
         }
         .catalog-pagination span:hover,
         .catalog-pagination span.active {
             background: var(--accent-primary);
             color: #ffffff;
+        }
+
+        @media (min-width: 768px) {
+            .catalog-search {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .catalog-search input {
+                flex: 1;
+                min-width: 200px;
+            }
+            .catalog-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .catalog-header h1 {
+                font-size: 2.5rem;
+            }
         }
 
         /* ══════════════ CHAT PAGE ══════════════ */

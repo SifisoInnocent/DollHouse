@@ -5,72 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thuto's Dollhouse – Hair & Beyond</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%23d4a5a5'/><text x='16' y='22' font-family='Arial' font-size='20' font-weight='bold' fill='white' text-anchor='middle'>TD</text></svg>" />
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
     <style>
         /* ══════════════════════════════════════
-           DESIGN TOKENS — LUXURY ELEGANT PALETTE
+           DESIGN TOKENS — DARK MODERN PALETTE
         ════════════════════════════════════ */
         :root {
-            --bg-body: #faf8f5;
-            --bg-card: #ffffff;
-            --bg-alt: #f4f1ed;
-            --bg-input: #ffffff;
-            --border-light: #e5e0d8;
-            --text-primary: #1a1a1a;
-            --text-secondary: #4a4a4a;
-            --text-muted: #7a7a7a;
-            --accent-primary: #b89668;
-            --accent-primary-light: #d4c0a0;
-            --accent-primary-dim: rgba(184, 150, 104, 0.1);
-            --accent-secondary: #7a6248;
-            --accent-secondary-light: #9a8060;
-            --accent-secondary-dim: rgba(122, 98, 72, 0.1);
-            --accent-gradient: linear-gradient(135deg, #b89668 0%, #7a6248 100%);
-            --gold-gradient: linear-gradient(135deg, #c9a978 0%, #b89668 50%, #7a6248 100%);
-            --luxury-gradient: linear-gradient(135deg, #d4c4a8 0%, #b89668 30%, #7a6248 70%, #5a4838 100%);
-            --shadow-sm: 0 2px 16px rgba(0, 0, 0, 0.03);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.07);
-            --shadow-primary: 0 8px 32px rgba(184, 150, 104, 0.2);
-            --shadow-luxury: 0 12px 48px rgba(184, 150, 104, 0.15);
-            --radius: 20px;
-            --radius-full: 999px;
-            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --header-h: 80px;
-            --font-display: 'Cormorant Garamond', serif;
-            --font-serif: 'Cormorant Garamond', serif;
-            --font-body: 'Inter', sans-serif;
-            --header-bg-rgb: 255, 255, 255;
-        }
-
-        html[data-theme="dark"] {
-            --bg-body: #141414;
-            --bg-card: #1e1e1e;
-            --bg-alt: #191919;
-            --bg-input: #252525;
-            --border-light: #333333;
-            --text-primary: #f5f5f5;
+            --bg-body: #1a1a1a;
+            --bg-card: #2a2a2a;
+            --bg-alt: #252525;
+            --bg-input: #333333;
+            --border-light: #3a3a3a;
+            --text-primary: #ffffff;
             --text-secondary: #c5c5c5;
             --text-muted: #888888;
-            --accent-primary: #c9a87a;
-            --accent-primary-light: #e0d0b0;
-            --accent-primary-dim: rgba(201, 168, 122, 0.12);
-            --accent-secondary: #a89070;
-            --accent-secondary-light: #c8b090;
-            --accent-secondary-dim: rgba(168, 144, 112, 0.12);
-            --accent-gradient: linear-gradient(135deg, #c9a87a 0%, #a89070 100%);
-            --gold-gradient: linear-gradient(135deg, #e0d0b0 0%, #c9a87a 50%, #a89070 100%);
-            --luxury-gradient: linear-gradient(135deg, #e8d8c0 0%, #c9a87a 30%, #a89070 70%, #887050 100%);
-            --shadow-sm: 0 2px 16px rgba(0, 0, 0, 0.4);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.6);
-            --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.8);
-            --shadow-primary: 0 8px 32px rgba(201, 168, 122, 0.15);
-            --shadow-luxury: 0 12px 48px rgba(201, 168, 122, 0.1);
-            --header-bg-rgb: 20, 20, 20;
+            --accent-primary: #ff6b35;
+            --accent-primary-light: #ff8c5a;
+            --accent-primary-dim: rgba(255, 107, 53, 0.15);
+            --accent-secondary: #00d4ff;
+            --accent-secondary-light: #40e0ff;
+            --accent-secondary-dim: rgba(0, 212, 255, 0.15);
+            --accent-gradient: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            --dark-gradient: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            --shadow-sm: 0 2px 16px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.5);
+            --shadow-primary: 0 8px 32px rgba(255, 107, 53, 0.3);
+            --radius: 12px;
+            --radius-full: 999px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --header-h: 70px;
+            --font-display: 'Playfair Display', serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --header-bg-rgb: 26, 26, 26;
+        }
+
+        html[data-theme="light"] {
+            --bg-body: #ffffff;
+            --bg-card: #f8f8f8;
+            --bg-alt: #f0f0f0;
+            --bg-input: #ffffff;
+            --border-light: #e0e0e0;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #888888;
+            --accent-primary: #ff6b35;
+            --accent-primary-light: #ff8c5a;
+            --accent-primary-dim: rgba(255, 107, 53, 0.15);
+            --accent-secondary: #00d4ff;
+            --accent-secondary-light: #40e0ff;
+            --accent-secondary-dim: rgba(0, 212, 255, 0.15);
+            --accent-gradient: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            --dark-gradient: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            --shadow-sm: 0 2px 16px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.16);
+            --shadow-primary: 0 8px 32px rgba(255, 107, 53, 0.25);
+            --header-bg-rgb: 255, 255, 255;
         }
 
 
@@ -428,43 +424,75 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: calc(var(--header-h) + 100px) 0 120px;
+            justify-content: center;
+            padding: calc(var(--header-h) + 60px) 0 80px;
             background:
-                radial-gradient(ellipse 100% 70% at 80% 15%, rgba(184, 150, 104, 0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 60% 50% at 15% 85%, rgba(122, 98, 72, 0.08) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 50% 50%, rgba(184, 150, 104, 0.04) 0%, transparent 70%),
-                var(--bg-body);
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+                url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80') center/cover no-repeat;
             position: relative;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -250px;
-            right: -250px;
-            width: 700px;
-            height: 700px;
-            border-radius: 50%;
-            border: 1px solid rgba(184, 150, 104, 0.12);
-            animation: heroRing 40s linear infinite;
-            pointer-events: none;
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
         }
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -350px;
-            right: -350px;
-            width: 900px;
-            height: 900px;
-            border-radius: 50%;
-            border: 1px solid rgba(122, 98, 72, 0.08);
-            animation: heroRing 50s linear infinite reverse;
-            pointer-events: none;
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
         }
-        @keyframes heroRing {
-            to {
-                transform: rotate(360deg);
-            }
+        .hero-sub {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .hero-btn-primary {
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 16px 40px;
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.02em;
+        }
+        .hero-btn-primary:hover {
+            background: var(--accent-primary);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        .hero-btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            padding: 16px 40px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.02em;
+        }
+        .hero-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+            transform: translateY(-2px);
         }
         .hero-grid {
             display: grid;
@@ -1840,6 +1868,287 @@
             }
         }
 
+        /* ══════════════ CATALOG PAGE ══════════════ */
+        .catalog-page {
+            padding: calc(var(--header-h) + 60px) 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .catalog-header {
+            margin-bottom: 40px;
+        }
+        .catalog-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        .catalog-search {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .catalog-search input,
+        .catalog-search select {
+            padding: 12px 20px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .catalog-search input {
+            flex: 1;
+            min-width: 200px;
+        }
+        .catalog-search input:focus,
+        .catalog-search select:focus {
+            border-color: var(--accent-primary);
+        }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .catalog-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: var(--transition);
+        }
+        .catalog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-primary);
+        }
+        .catalog-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--accent-primary-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+        .catalog-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .catalog-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .catalog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .catalog-card-btn {
+            background: var(--accent-primary);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .catalog-card-btn:hover {
+            background: var(--accent-primary-light);
+        }
+        .catalog-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .catalog-pagination span {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-secondary);
+        }
+        .catalog-pagination span:hover,
+        .catalog-pagination span.active {
+            background: var(--accent-primary);
+            color: #fff;
+        }
+
+        /* ══════════════ CHAT PAGE ══════════════ */
+        .chat-page {
+            padding: calc(var(--header-h) + 60px) 40px 80px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chat-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+        }
+        .chat-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .chat-header h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .chat-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .chat-form .form-group {
+            margin-bottom: 24px;
+        }
+        .chat-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .chat-form input,
+        .chat-form textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .chat-form input:focus,
+        .chat-form textarea:focus {
+            border-color: var(--accent-primary);
+        }
+        .chat-submit {
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .chat-submit:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* ══════════════ REPORT PAGE ══════════════ */
+        .report-page {
+            padding: calc(var(--header-h) + 60px) 40px 80px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .report-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+        }
+        .report-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .report-header h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .report-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .report-form .form-group {
+            margin-bottom: 24px;
+        }
+        .report-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .report-form input,
+        .report-form select,
+        .report-form textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .report-form input:focus,
+        .report-form select:focus,
+        .report-form textarea:focus {
+            border-color: var(--accent-primary);
+        }
+        .report-submit {
+            background: var(--accent-primary);
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .report-submit:hover {
+            background: var(--accent-primary-light);
+            transform: translateY(-2px);
+        }
+
         /* ══════════════════════════════════════
            FLOATING BUTTONS
         ══════════════════════════════════════ */
@@ -2150,10 +2459,9 @@
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a data-page="home" onclick="navigate('home')">Home</a></li>
-                <li><a data-page="frontals" onclick="navigate('frontals')">Frontals</a></li>
-                <li><a data-page="hair-products" onclick="navigate('hair-products')">Hair</a></li>
-                <li><a data-page="consumables" onclick="navigate('consumables')">Consumables</a></li>
-                <li><a data-page="tripods" onclick="navigate('tripods')">Tripods</a></li>
+                <li><a data-page="catalog" onclick="navigate('catalog')">Catalog</a></li>
+                <li><a data-page="chat" onclick="navigate('chat')">Chat</a></li>
+                <li><a data-page="report" onclick="navigate('report')">Report</a></li>
                 <li><a data-page="wishlist" onclick="navigate('wishlist')"><i class="fas fa-heart"></i></a></li>
                 <li><a class="admin-pill" data-page="admin" onclick="navigate('admin')"><i class="fas fa-cog"></i> Admin</a></li>
             </ul>
@@ -2171,27 +2479,118 @@
     <!-- ══════════════ HERO ══════════════ -->
     <section id="page-home">
         <div class="hero">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <div class="hero-eyebrow">Premium Hair & Beauty · South Africa</div>
-                    <h1 class="hero-h1">
-                        <em>Elevate Your</em>
-                        <strong class="gold-text">Beauty</strong>
-                        Journey
-                    </h1>
-                    <p class="hero-sub">Experience luxury frontals, premium hair products, and exclusive accessories. Where quality meets elegance, and every client deserves to shine.</p>
-                    <div class="hero-actions">
-                        <button class="btn btn-gold" onclick="navigate('frontals')"><i class="fas fa-gem"></i> Shop Collection</button>
-                        <button class="btn btn-ghost" onclick="navigate('hair-products')"><i class="fas fa-sparkles"></i> View Products</button>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat"><div class="num" id="stat-products">0</div><div class="label">Products</div></div>
-                        <div class="hero-stat"><div class="num">⭐ 5</div><div class="label">Rating</div></div>
-                        <div class="hero-stat"><div class="num">24/7</div><div class="label">Support</div></div>
-                    </div>
+            <div class="hero-content">
+                <h1 class="hero-h1">THUTO'S DOLLHOUSE</h1>
+                <p class="hero-sub">Premium Hair & Beauty Products. Experience luxury frontals, premium hair products, and exclusive accessories. Where quality meets elegance.</p>
+                <div class="hero-actions">
+                    <button class="hero-btn-primary" onclick="navigate('catalog')">View Catalog</button>
+                    <button class="hero-btn-secondary" onclick="navigate('chat')">Chat With Us</button>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- ══════════════ CATALOG PAGE ══════════════ -->
+    <section id="page-catalog" style="display:none;">
+        <div class="catalog-page">
+            <div class="catalog-header">
+                <h1>Data Catalog</h1>
+                <div class="catalog-search">
+                    <input type="text" placeholder="Search catalog here" id="catalogSearch" />
+                    <select id="catalogTag">
+                        <option value="">Tag</option>
+                        <option value="frontal">Frontal</option>
+                        <option value="hair">Hair</option>
+                        <option value="accessory">Accessory</option>
+                    </select>
+                    <select id="catalogSource">
+                        <option value="">Source</option>
+                        <option value="premium">Premium</option>
+                        <option value="standard">Standard</option>
+                    </select>
+                    <select id="catalogIndustry">
+                        <option value="">Industry</option>
+                        <option value="beauty">Beauty</option>
+                        <option value="fashion">Fashion</option>
+                    </select>
+                </div>
+            </div>
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Catalog items will be rendered here -->
+            </div>
+            <div class="catalog-pagination">
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>...</span>
+                <span>10</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════ CHAT PAGE ══════════════ -->
+    <section id="page-chat" style="display:none;">
+        <div class="chat-page">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h1>Chat With Us</h1>
+                    <p>Send your queries directly to WhatsApp</p>
+                </div>
+                <div class="chat-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="chatName" placeholder="Enter your name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Your Message</label>
+                        <textarea id="chatMessage" rows="5" placeholder="Type your message here..."></textarea>
+                    </div>
+                    <button class="chat-submit" onclick="sendToWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Send to WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════ REPORT PAGE ══════════════ -->
+    <section id="page-report" style="display:none;">
+        <div class="report-page">
+            <div class="report-container">
+                <div class="report-header">
+                    <h1>Report an Issue</h1>
+                    <p>Let us know about any problems you've encountered</p>
+                </div>
+                <div class="report-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="reportName" placeholder="Enter your name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="reportEmail" placeholder="Enter your email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Issue Type</label>
+                        <select id="reportType">
+                            <option value="">Select issue type</option>
+                            <option value="product">Product Issue</option>
+                            <option value="order">Order Issue</option>
+                            <option value="website">Website Issue</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="reportDescription" rows="5" placeholder="Describe the issue..."></textarea>
+                    </div>
+                    <button class="report-submit" onclick="submitReport()">
+                        <i class="fas fa-paper-plane"></i> Submit Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
         <!-- ABOUT SECTION -->
         <div class="section">
@@ -2932,7 +3331,7 @@
 
         /* ─── NAVIGATION ─── */
         function navigate(page) {
-            ['page-home', 'page-admin', 'page-wishlist'].forEach(id => {
+            ['page-home', 'page-admin', 'page-wishlist', 'page-catalog', 'page-chat', 'page-report'].forEach(id => {
                 const el = $(id);
                 if (el) el.style.display = 'none';
             });
@@ -2943,6 +3342,19 @@
             if (page === 'home') {
                 $('page-home').style.display = 'block';
                 document.querySelector('.nav-links a[data-page="home"]')?.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (page === 'catalog') {
+                $('page-catalog').style.display = 'block';
+                document.querySelector('.nav-links a[data-page="catalog"]')?.classList.add('active');
+                renderCatalog();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (page === 'chat') {
+                $('page-chat').style.display = 'block';
+                document.querySelector('.nav-links a[data-page="chat"]')?.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (page === 'report') {
+                $('page-report').style.display = 'block';
+                document.querySelector('.nav-links a[data-page="report"]')?.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (page === 'admin') {
                 if (!isAdmin) {
@@ -2969,6 +3381,77 @@
                     if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
                 }, 100);
             }
+        }
+
+        /* ─── CATALOG RENDERING ─── */
+        function renderCatalog() {
+            const grid = $('catalogGrid');
+            if (!grid) return;
+            
+            // Fetch products and render as catalog items
+            fetch('/api/products/')
+                .then(res => res.json())
+                .then(products => {
+                    grid.innerHTML = products.map(product => `
+                        <div class="catalog-card">
+                            <div class="catalog-card-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <h3>${product.name}</h3>
+                            <p>${product.desc || 'Premium hair product'}</p>
+                            <div class="catalog-card-meta">
+                                <span>Source: Premium</span>
+                                <span>Last Update: Today</span>
+                            </div>
+                            <button class="catalog-card-btn" onclick="navigate('frontals')">Explore</button>
+                        </div>
+                    `).join('');
+                })
+                .catch(err => {
+                    console.error('Failed to load catalog:', err);
+                    grid.innerHTML = '<p style="color:var(--text-muted);">Failed to load catalog</p>';
+                });
+        }
+
+        /* ─── WHATSAPP CHAT ─── */
+        function sendToWhatsApp() {
+            const name = $('chatName').value;
+            const message = $('chatMessage').value;
+            
+            if (!name || !message) {
+                toast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            const whatsappNumber = '27718233972'; // Your WhatsApp number
+            const text = `Hello, my name is ${name}. ${message}`;
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+            
+            window.open(url, '_blank');
+            toast('Opening WhatsApp...', 'info');
+        }
+
+        /* ─── REPORT SUBMISSION ─── */
+        function submitReport() {
+            const name = $('reportName').value;
+            const email = $('reportEmail').value;
+            const type = $('reportType').value;
+            const description = $('reportDescription').value;
+            
+            if (!name || !email || !type || !description) {
+                toast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Here you would typically send this to your backend
+            // For now, we'll show a success message
+            toast('Report submitted successfully!', 'success');
+            
+            // Clear form
+            $('reportName').value = '';
+            $('reportEmail').value = '';
+            $('reportType').value = '';
+            $('reportDescription').value = '';
         }
 
         /* ─── TABS ─── */
